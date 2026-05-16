@@ -37,7 +37,7 @@ SigninLogs
 | where PotentialImpossibleTravelInstances > NumberOfDifferentLocationsAllowed
 | sort by PotentialImpossibleTravelInstances desc 
 ```
-<img width="1908" height="707" alt="1" src="https://github.com/user-attachments/assets/ab61489c-d026-45e6-9126-e2bd53f189c7" />
+<img width="1700" alt="1" src="https://github.com/user-attachments/assets/496fd22d-ee8b-44ba-85ce-75893b8a3f36" />
 
 3. **Analytics Rule Settings:**  
    - **Name:** Potential Impossible Travel Alert  
