@@ -27,16 +27,17 @@ Set up a Sentinel **Scheduled Query Rule** in Log Analytics to detect users logg
 2. **KQL Query:**
    
 ```kql
-let TimePeriodThreshold = timespan(7d);
-let NumberOfDifferentLocationAllowed = 1;
+let TimePeriodThreshold = timespan(7d); // Change to how far back you want to look
+let NumberOfDifferentLocationsAllowed = 1;
 SigninLogs
 | where TimeGenerated > ago(TimePeriodThreshold)
-| summarize count() by UserPrincipalName, City = tostring(parse_json(LocationDetails).city), State = tostring(parse_json(LocationDetails).state), Country = tostring(parse_json(LocationDetails).countryOrRegion)
-| project UserPrincipalName, City, State, Country
-| summarize PotentialImpossibleTravelInstances = count() by UserPrincipalName
-| where PotentialImpossibleTravelInstances > NumberOfDifferentLocationAllowed
+| summarize Count = count() by UserPrincipalName, UserId, City = tostring(parse_json(LocationDetails).city), State = tostring(parse_json(LocationDetails).state), Country = tostring(parse_json(LocationDetails).countryOrRegion)
+| project UserPrincipalName, UserId, City, State, Country
+| summarize PotentialImpossibleTravelInstances = count() by UserPrincipalName, UserId
+| where PotentialImpossibleTravelInstances > NumberOfDifferentLocationsAllowed
+| sort by PotentialImpossibleTravelInstances desc 
 ```
-![Screenshot 2025-01-08 105713](https://github.com/user-attachments/assets/1934650d-0b0c-47c6-a3a8-c45d8d8eadb0)
+<img width="1908" height="707" alt="1" src="https://github.com/user-attachments/assets/ab61489c-d026-45e6-9126-e2bd53f189c7" />
 
 3. **Analytics Rule Settings:**  
    - **Name:** Potential Impossible Travel Alert  
