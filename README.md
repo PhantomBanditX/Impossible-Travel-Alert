@@ -37,7 +37,7 @@ SigninLogs
 | where PotentialImpossibleTravelInstances > NumberOfDifferentLocationsAllowed
 | sort by PotentialImpossibleTravelInstances desc 
 ```
-<img width="1700" alt="1" src="https://github.com/user-attachments/assets/496fd22d-ee8b-44ba-85ce-75893b8a3f36" />
+<img width="1700" height="648" alt="1" src="https://github.com/user-attachments/assets/496fd22d-ee8b-44ba-85ce-75893b8a3f36" />
 
 3. **Analytics Rule Settings:**  
    - **Name:** Potential Impossible Travel Alert  
@@ -61,21 +61,20 @@ SigninLogs
    - 📊 Examine output from the analytics rule to identify flagged accounts.  
 
 2. **Account Analysis:**  
-   **Example Query:**  
    ```kql
-   let TimePeriodThreshold = timespan(7d);
+   let TimePeriodThreshold = timespan(7d); // Change to how far back you want to look
    SigninLogs
    | where TimeGenerated > ago(TimePeriodThreshold)
-   | where UserPrincipalName == "username@domain.com"
-   | project TimeGenerated, UserPrincipalName, UserId, City, State, Country
-   | order by TimeGenerated desc
+   | where UserPrincipalName == "b0f7738e0e146afe1560ee169046022c1a9a8c6ca9e77307571a8e3990e121f4@lognpacific.com"
+   | project TimeGenerated, UserPrincipalName, City = tostring(parse_json(LocationDetails).city), State = tostring(parse_json(LocationDetails).state),Country = 
+   tostring (parse_json(LocationDetails).countryOrRegion)
+   | order by TimeGenerated desc 
    ```
-![Screenshot 2025-01-08 121358](https://github.com/user-attachments/assets/2739121d-5914-4468-a480-cecee0883432)
+   <img width="1700" height="648" alt="2" src="https://github.com/user-attachments/assets/0510de6f-d3f6-428d-b239-2d54353fab61" />
 
    **Observed Findings:**  
-   - **Account 1:** Logins from 3 nearby locations within 4 days. No unusual behavior.  
-   - **Account 2:** Logins from 4 locations within 7 days. All locations were within a 2-hour train ride.  
-
+   - **Account 1:** Identifies unusual sign-in behavior where a user account logs in from multiple countries within a short timeframe, indicating impossible travel. 
+    
 ---
 
 ## 🛠️ **Containment, Eradication, and Recovery**  
