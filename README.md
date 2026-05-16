@@ -80,9 +80,9 @@ SigninLogs
 ## 🛠️ **Containment, Eradication, and Recovery**  
 
 - **Outcome:**  
-   The alert was determined to be **True Benign**:  
-   - Account activity aligned with expected behavior.  
-   - Users logged into locations within reasonable proximity and timeframes.  
+   The alert was determined to be a **True Positive**:  
+   - Account activity exhibited suspicious and anomalous behavior.  
+   - User logged into locations within an impossible travel distance and timeframes.  
 
 - **Next Steps:**  
    - 🔍 Pivot to analyze additional activity for these accounts using:  
