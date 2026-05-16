@@ -84,13 +84,10 @@ SigninLogs
    - Account activity exhibited suspicious and anomalous behavior.  
    - User logged into locations within an impossible travel distance and timeframes.  
 
-- **Next Steps:**  
-   - 🔍 Pivot to analyze additional activity for these accounts using:  
-     ```kql
-     AzureActivity
-     | where tostring(parse_json(Claims)["http://schemas.microsoft.com/identity/claims/objectidentifier"]) == "AzureADObjectID"
-     ```  
-   - **If suspicious behavior is detected**, disable the account and escalate.  
+-  Isolate affected systems to prevent further damage.
+    - Deactivate Account and notify the users manager
+   
+  - Investigate whether the threat actor was able to laterally move to other devices or make unauthorized changes during the active session.
 
 ---
 
@@ -117,4 +114,4 @@ SigninLogs
 - Better geographic restrictions can enhance security.  
 - Not all triggers are threats; careful analysis prevents unnecessary escalations.  
 
-📈 **Always stay vigilant!** 🛡️
+
