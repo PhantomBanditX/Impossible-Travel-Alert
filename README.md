@@ -16,6 +16,13 @@ Trigger an alert in Sentinel if a user logs into more than **one location** with
 
 ---
 
+### Components, Tools, and Technologies Employed
+
+- **Cloud Environment:** Microsoft Azure (VM-Windows target machine)
+- **Threat Detection Platform:** Microsoft Sentinel, Azure Log Analytics, Kusto Query Language (KQL), Microsoft Azure
+  
+----
+
 ## 🚦 **Creating the Alert Rule (Potential Impossible Travel)**  
 **Objective:**  
 Set up a Sentinel **Scheduled Query Rule** in Log Analytics to detect users logging into multiple geographic regions.  
